@@ -552,82 +552,11 @@ button:hover, .repp-link-button:hover {
      /* Push nav buttons container to bottom */
     .step .nav-buttons {
         position: absolute;
-        bottom: 0;
+        bottom: 15px; /* Raise slightly from the bottom */
         left: 0;
         right: 0;
-        padding: 15px 25px;
-        justify-content: space-between;
-        align-items: center; /* Ensure vertical alignment */
-        background-color: #ffffff;
-        border-top: 1px solid #eee;
-        gap: 15px;
-    }
-     .step .nav-buttons button {
-        width: auto;
-        flex-grow: 0; /* Reset grow initially */
-        flex-shrink: 1; /* Allow shrinking if needed, except round button */
-        margin: 0;
-     }
-
-     /* Let regular buttons grow if needed on mobile */
-     .step .nav-buttons button:not(.round-next-button) {
-        flex-grow: 1;
-     }
-
-     /* Ensure round button specific sizes and flex props on mobile */
-     .step .nav-buttons .round-next-button {
-        width: 60px;
-        height: 60px;
-        flex-basis: 60px;
-        flex-grow: 0;
-        flex-shrink: 0;
-        padding: 0;
-        margin: 0;
-     }
-
-}
-
-/* Keep mobile grid adjustments from previous state */
-@media (max-width: 480px) {
-     /* Re-apply mobile specific grid if needed, but base is mobile-first */
-    .options-container.storage-options {
-        grid-template-columns: repeat(2, 1fr); /* Ensure 2 columns */
-    }
-    .surface-options {
-        grid-template-columns: repeat(2, 1fr); /* Two columns on small mobile */
-        grid-template-areas:
-            "lt25  40m2"
-            "50m2  gt50"
-            "geenidee anders"; /* Keep anders spanning 2 */
-    }
-    .surface-options .option-anders { grid-area: anders; }
-
-    /* Ensure step provides enough padding for buttons and content can scroll */
-     .step {
-        /* padding-bottom: 80px; Increased */
-        padding-bottom: 100px; /* Increased padding */
-        position: relative;
-        /* Allow step itself to grow but manage content scroll separately */
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Allow content within the step to scroll if it overflows */
-    .step-content {
-        flex-grow: 1; /* Allow content to take available space */
-        overflow-y: auto; /* Enable vertical scrolling only for content */
-        /* Add some padding at the bottom inside the scrollable area */
-        padding-bottom: 10px;
-    }
-
-     /* Push nav buttons container to bottom */
-    .step .nav-buttons {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 15px 25px;
-        justify-content: space-between;
+        padding: 15px 25px; /* Consistent padding */
+        justify-content: space-between; /* Ensure space-between */
         align-items: center; /* Ensure vertical alignment */
         background-color: #ffffff;
         border-top: 1px solid #eee;
