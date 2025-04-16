@@ -554,7 +554,7 @@ button:hover, .repp-link-button:hover {
      /* Push nav buttons container to bottom */
     .step .nav-buttons {
         position: absolute;
-        bottom: 60px; /* Raised significantly higher */
+        bottom: 90px; /* Raised even higher */
         left: 0;
         right: 0;
         padding: 15px 25px; /* Consistent padding */
