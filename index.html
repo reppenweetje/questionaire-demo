@@ -27,40 +27,42 @@
         <!-- Vraag 1: Doel van aankoop (Stap 2) -->
         <div class="step" id="step-2" style="display: none;">
              <div class="progress-indicator"><div></div><div></div><div></div><div></div><div></div></div>
-            <h2>Doel van aankoop</h2>
-            <p>Waarvoor zoek je een garagebox?</p>
-            <!-- Added purpose-options class -->
-            <div class="options-container single-choice purpose-options">
-                <div class="option" data-value="eigen_gebruik">
-                    <img src="icon-eigengebruik.png" alt="Eigen gebruik icoon"> <!-- Updated Icon -->
-                    <span>Eigen gebruik</span>
+             <!-- Added step-content wrapper -->
+             <div class="step-content">
+                <h2>Doel van aankoop</h2>
+                <p>Waarvoor zoek je een garagebox?</p>
+                <div class="options-container single-choice purpose-options">
+                    <div class="option" data-value="eigen_gebruik">
+                        <img src="icon-eigengebruik.png" alt="Eigen gebruik icoon">
+                        <span>Eigen gebruik</span>
+                    </div>
+                    <div class="option" data-value="belegging">
+                         <img src="icon-belegging.png" alt="Belegging (verhuur) icoon">
+                        <span>Belegging (verhuur)</span>
+                    </div>
                 </div>
-                <div class="option" data-value="belegging">
-                     <img src="icon-belegging.png" alt="Belegging (verhuur) icoon"> <!-- Updated Icon -->
-                    <span>Belegging (verhuur)</span>
-                </div>
-            </div>
-            <!-- Added nav-buttons container and round-next-button -->
-            <div class="nav-buttons">
-                <button class="next-button round-next-button">&#8594;</button> <!-- Arrow Right -->
-            </div>
+             </div>
+             <div class="nav-buttons">
+                <button class="next-button round-next-button">&#8594;</button>
+             </div>
         </div>
 
          <!-- Vraag 2: Doel van unit (Stap 3 - Opslag) -->
         <div class="step" id="step-3" style="display: none;">
              <div class="progress-indicator"><div></div><div></div><div></div><div></div><div></div></div>
-            <h2>Doel van unit</h2>
-            <p>Wat wil je opslaan in de unit?</p>
-             <!-- Added storage-options class -->
-             <div class="options-container multiple-choice storage-options">
-                 <div class="option" data-value="auto">Auto</div>
-                 <div class="option" data-value="boot">Boot</div>
-                 <div class="option" data-value="karavan">Karavan</div>
-                 <div class="option" data-value="fietsen">Fietsen</div>
-                 <div class="option" data-value="verhuisdozen">Verhuisdozen</div>
-                 <div class="option" data-value="overig">Overig</div>
+             <!-- Added step-content wrapper -->
+             <div class="step-content">
+                <h2>Doel van unit</h2>
+                <p>Wat wil je opslaan in de unit?</p>
+                 <div class="options-container multiple-choice storage-options">
+                     <div class="option" data-value="auto">Auto</div>
+                     <div class="option" data-value="boot">Boot</div>
+                     <div class="option" data-value="karavan">Karavan</div>
+                     <div class="option" data-value="fietsen">Fietsen</div>
+                     <div class="option" data-value="verhuisdozen">Verhuisdozen</div>
+                     <div class="option" data-value="overig">Overig</div>
+                 </div>
              </div>
-             <!-- Added nav-buttons container -->
              <div class="nav-buttons">
                 <button class="prev-button">Vorige</button>
                 <button class="next-button round-next-button">&#8594;</button>
@@ -70,20 +72,21 @@
         <!-- Vraag 3: Gewenste oppervlakte (Stap 4) -->
         <div class="step" id="step-4" style="display: none;">
             <div class="progress-indicator"><div></div><div></div><div></div><div></div><div></div></div>
-            <h2>Gewenste oppervlakte</h2>
-            <p>Hoeveel ruimte heb je nodig?</p>
-            <!-- surface-options class was already present -->
-            <div class="options-container single-choice surface-options">
-                <div class="option" data-value="<25m2">&lt;25m2</div>
-                <div class="option" data-value="~40m2">±40m2</div>
-                <div class="option" data-value="~50m2">±50m2</div>
-                <div class="option" data-value=">50m2">&gt;50m2</div>
-                <div class="option" data-value="geen_idee">Ik heb nog geen idee</div>
-                <div class="option option-anders" data-value="anders">
-                    Anders, namelijk: <input type="text" id="oppervlakte_anders_input" placeholder="__ m²" disabled>
-                 </div>
-            </div>
-            <!-- Added nav-buttons container -->
+             <!-- Added step-content wrapper -->
+             <div class="step-content">
+                <h2>Gewenste oppervlakte</h2>
+                <p>Hoeveel ruimte heb je nodig?</p>
+                <div class="options-container single-choice surface-options">
+                    <div class="option" data-value="<25m2">&lt;25m2</div>
+                    <div class="option" data-value="~40m2">±40m2</div>
+                    <div class="option" data-value="~50m2">±50m2</div>
+                    <div class="option" data-value=">50m2">&gt;50m2</div>
+                    <div class="option" data-value="geen_idee">Ik heb nog geen idee</div>
+                    <div class="option option-anders" data-value="anders">
+                        Anders, namelijk: <input type="text" id="oppervlakte_anders_input" placeholder="__ m²" disabled>
+                     </div>
+                </div>
+             </div>
              <div class="nav-buttons">
                  <button class="prev-button">Vorige</button>
                  <button class="next-button round-next-button">&#8594;</button>
@@ -93,15 +96,16 @@
         <!-- Vraag 4: Financieringsprofiel Type (Stap 5) -->
          <div class="step" id="step-5" style="display: none;">
             <div class="progress-indicator"><div></div><div></div><div></div><div></div><div></div></div>
-            <h2>Financieringsprofiel</h2>
-            <p>Hoe wil je jouw aankoop financieren?</p>
-            <!-- financing-options class was already present -->
-            <div class="options-container single-choice financing-options">
-                <div class="option" data-value="eigen_80_100">Voornamelijk eigen vermogen (80–100%)</div>
-                <div class="option" data-value="eigen_lening_50_80">Eigen vermogen + lening (50–80%)</div>
-                <div class="option" data-value="financiering_tot_30">Voornamelijk financiering (tot 30% eigen vermogen)</div>
-            </div>
-            <!-- Added nav-buttons container -->
+             <!-- Added step-content wrapper -->
+             <div class="step-content">
+                <h2>Financieringsprofiel</h2>
+                <p>Hoe wil je jouw aankoop financieren?</p>
+                <div class="options-container single-choice financing-options">
+                    <div class="option" data-value="eigen_80_100">Voornamelijk eigen vermogen (80–100%)</div>
+                    <div class="option" data-value="eigen_lening_50_80">Eigen vermogen + lening (50–80%)</div>
+                    <div class="option" data-value="financiering_tot_30">Voornamelijk financiering (tot 30% eigen vermogen)</div>
+                </div>
+             </div>
             <div class="nav-buttons">
                  <button class="prev-button">Vorige</button>
                  <button class="next-button round-next-button">&#8594;</button>
@@ -111,29 +115,29 @@
         <!-- Vraag 5: Financieringsprofiel Eigen Geld (Stap 6) -->
         <div class="step" id="step-6" style="display: none;">
              <div class="progress-indicator"><div></div><div></div><div></div><div></div><div></div></div>
-            <h2>Financieringsprofiel</h2>
-            <p>Hoeveel eigen geld kun/wil je ongeveer investeren?</p>
-            <!-- Added outer container for rotation -->
-            <div class="slider-outer-container">
-                <div id="slider-value-display">€100.000</div>
-                <div class="slider-labels-container">
-                    <span>€1.000.000</span>
-                    <span>€500.000</span>
-                    <span>€200.000</span>
-                    <span>€100.000</span>
-                    <span>€75.000</span>
-                    <span>€25.000</span>
-                    <span>€0</span>
-                </div>
-                <!-- Rotated container -->
-                <div class="slider-container">
-                    <input type="range" id="eigen-geld-slider" min="0" max="6" step="1" value="3">
-                </div>
+            <!-- Added step-content wrapper -->
+             <div class="step-content">
+                <h2>Financieringsprofiel</h2>
+                <p>Hoeveel eigen geld kun/wil je ongeveer investeren?</p>
+                <div class="slider-outer-container">
+                    <div id="slider-value-display">€100.000</div>
+                    <div class="slider-labels-container">
+                         <span>€1.000.000</span>
+                         <span>€500.000</span>
+                         <span>€200.000</span>
+                         <span>€100.000</span>
+                         <span>€75.000</span>
+                         <span>€25.000</span>
+                         <span>€0</span>
+                     </div>
+                    <div class="slider-container">
+                        <input type="range" id="eigen-geld-slider" min="0" max="6" step="1" value="3">
+                    </div>
+                 </div>
              </div>
-             <!-- Added nav-buttons container -->
-            <div class="nav-buttons">
+             <div class="nav-buttons">
                  <button class="prev-button">Vorige</button>
-                 <button class="submit-button">Versturen</button> <!-- Normal submit button -->
+                 <button class="submit-button">Versturen</button>
              </div>
         </div>
 

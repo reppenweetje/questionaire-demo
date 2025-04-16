@@ -40,7 +40,7 @@ body {
     border-radius: 0; /* No border radius on mobile */
     box-shadow: none; /* No shadow on mobile */
     overflow: hidden;
-    height: 100vh; /* Full height on mobile */
+    min-height: 100vh; /* Use min-height for better mobile compatibility */
     display: flex;
     flex-direction: column;
 }
@@ -158,36 +158,39 @@ button:hover, .repp-link-button:hover {
 /* Navigation Buttons (Prev/Next/Submit) */
 .step .nav-buttons {
     display: flex;
-    justify-content: center; /* Center buttons in the container */
-    gap: 10px; /* Space between buttons */
-    width: 100%; /* Container takes full width */
-    margin-top: auto; /* Push to bottom */
-    padding-top: 20px; /* Space above buttons */
+    justify-content: space-between; /* Push items to ends */
+    align-items: center; /* Ensure vertical alignment */
+    gap: 10px;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 20px;
+    position: static;
 }
 
 .step .prev-button,
-.step .next-button,
+.step .next-button:not(.round-next-button),
 .step .submit-button {
-    width: auto; /* Let button size be determined by content/padding */
-    padding: 14px 40px; /* Adjust padding for better look */
-    flex-grow: 0; /* Don't allow buttons to grow unevenly */
-    margin-top: 0; /* Reset margin-top as it's handled by nav-buttons */
-    align-self: initial; /* Reset self alignment */
+    /* Styles for regular buttons */
+    width: auto;
+    padding: 14px 40px;
+    flex-grow: 0; /* Don't grow by default */
 }
 
 /* Style for the big round next button */
 .step .round-next-button {
     width: 60px;
     height: 60px;
+    flex-basis: 60px; /* Reinforce fixed size */
+    flex-grow: 0; /* Don't grow */
+    flex-shrink: 0; /* Don't shrink */
     padding: 0;
     border-radius: 50%;
-    font-size: 1.5rem; /* Optional: Add arrow or icon later */
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: auto; /* Push to the right */
-    margin-right: 0; /* Align right */
-    align-self: flex-end; /* Align to bottom right */
+    /* Ensure no conflicting margins */
+    margin: 0;
 }
 
 /* Progress Indicator */
@@ -458,33 +461,66 @@ button:hover, .repp-link-button:hover {
     }
     .questionnaire-container {
         max-width: 420px;
-        height: auto; /* Auto height on larger screens */
+        /* height: auto; Already default */
+        min-height: auto; /* Reset min-height from mobile */
         border-radius: 12px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         margin: 40px auto;
     }
     .step {
-         padding: 40px 35px;
-         min-height: 550px; /* Give steps a consistent min height */
+         padding: 40px 35px; /* Restore desktop padding */
+         min-height: 550px; /* Give steps a consistent min height on desktop */
+         /* Ensure flex direction is correct */
+         flex-direction: column;
+         display: flex; /* Ensure flex is applied */
+         /* Remove position relative if only needed for mobile absolute positioning */
+         position: static;
     }
 
-     /* Adjust button widths for larger screens if needed */
-     .step .prev-button,
-    .step .next-button,
-    .step .submit-button {
-        /* width: auto; Keep auto */
+    /* Ensure content area doesn't scroll unnecessarily on desktop */
+    .step-content {
+        overflow-y: visible; /* Disable forced scroll */
+        flex-grow: 1; /* Allow content to push buttons down */
     }
 
-     .step .round-next-button {
-        /* Position might need adjustment */
-    }
+     /* Ensure nav buttons have correct spacing and alignment on desktop */
+     .step .nav-buttons {
+        position: static;
+        justify-content: space-between;
+        align-items: center; /* Ensure vertical alignment */
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 20px;
+        padding-bottom: 0;
+        border-top: none;
+        background-color: transparent;
+     }
+
+    /* Reset specific button width/grow from mobile */
+     .step .nav-buttons button {
+         width: auto;
+         flex-grow: 0;
+         margin: 0; /* Reset margins */
+     }
+
+     /* Ensure round button retains its specific styles on desktop */
+     .step .nav-buttons .round-next-button {
+        width: 60px;
+        height: 60px;
+        flex-basis: 60px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        padding: 0;
+        margin: 0; /* Ensure no auto margins */
+     }
+
 }
 
 /* Keep mobile grid adjustments from previous state */
 @media (max-width: 480px) {
      /* Re-apply mobile specific grid if needed, but base is mobile-first */
     .options-container.storage-options {
-        /* grid-template-columns: repeat(2, 1fr); Already default? Check images */
+        grid-template-columns: repeat(2, 1fr); /* Ensure 2 columns */
     }
     .surface-options {
         grid-template-columns: repeat(2, 1fr); /* Two columns on small mobile */
@@ -495,40 +531,134 @@ button:hover, .repp-link-button:hover {
     }
     .surface-options .option-anders { grid-area: anders; }
 
-     /* Push nav buttons container to bottom */
+    /* Ensure step provides enough padding for buttons and content can scroll */
      .step {
-        padding-bottom: 80px; /* Ensure space for buttons */
-        position: relative; /* Needed for absolute positioning of buttons */
+        /* padding-bottom: 80px; Increased */
+        padding-bottom: 100px; /* Increased padding */
+        position: relative;
+        /* Allow step itself to grow but manage content scroll separately */
+        display: flex;
+        flex-direction: column;
     }
+
+    /* Allow content within the step to scroll if it overflows */
+    .step-content {
+        flex-grow: 1; /* Allow content to take available space */
+        overflow-y: auto; /* Enable vertical scrolling only for content */
+        /* Add some padding at the bottom inside the scrollable area */
+        padding-bottom: 10px;
+    }
+
+     /* Push nav buttons container to bottom */
     .step .nav-buttons {
         position: absolute;
-        bottom: 20px;
+        bottom: 0;
         left: 0;
         right: 0;
-        padding-left: 25px;
-        padding-right: 25px;
-         justify-content: space-between; /* Space out prev/next */
+        padding: 15px 25px;
+        justify-content: space-between;
+        align-items: center; /* Ensure vertical alignment */
+        background-color: #ffffff;
+        border-top: 1px solid #eee;
+        gap: 15px;
     }
      .step .nav-buttons button {
-        width: auto; /* Allow buttons to size naturally */
-        flex-grow: 1; /* Allow buttons to take up space */
-        margin: 0 5px; /* Small margin between */
-    }
-    /* Special case for single button (Submit or Next on last question before submit?) */
-     .step .nav-buttons button:only-child {
-         width: 60%; /* Center single button */
-         margin-left: auto;
-         margin-right: auto;
+        width: auto;
+        flex-grow: 0; /* Reset grow initially */
+        flex-shrink: 1; /* Allow shrinking if needed, except round button */
+        margin: 0;
      }
 
-     /* Make round button centered at bottom */
-     .step .round-next-button {
-         position: absolute;
-         bottom: 20px;
-         left: 50%;
-         transform: translateX(-50%);
-         margin-left: 0;
-         margin-right: 0;
-         align-self: initial;
+     /* Let regular buttons grow if needed on mobile */
+     .step .nav-buttons button:not(.round-next-button) {
+        flex-grow: 1;
      }
+
+     /* Ensure round button specific sizes and flex props on mobile */
+     .step .nav-buttons .round-next-button {
+        width: 60px;
+        height: 60px;
+        flex-basis: 60px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        padding: 0;
+        margin: 0;
+     }
+
+}
+
+/* Keep mobile grid adjustments from previous state */
+@media (max-width: 480px) {
+     /* Re-apply mobile specific grid if needed, but base is mobile-first */
+    .options-container.storage-options {
+        grid-template-columns: repeat(2, 1fr); /* Ensure 2 columns */
+    }
+    .surface-options {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on small mobile */
+        grid-template-areas:
+            "lt25  40m2"
+            "50m2  gt50"
+            "geenidee anders"; /* Keep anders spanning 2 */
+    }
+    .surface-options .option-anders { grid-area: anders; }
+
+    /* Ensure step provides enough padding for buttons and content can scroll */
+     .step {
+        /* padding-bottom: 80px; Increased */
+        padding-bottom: 100px; /* Increased padding */
+        position: relative;
+        /* Allow step itself to grow but manage content scroll separately */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Allow content within the step to scroll if it overflows */
+    .step-content {
+        flex-grow: 1; /* Allow content to take available space */
+        overflow-y: auto; /* Enable vertical scrolling only for content */
+        /* Add some padding at the bottom inside the scrollable area */
+        padding-bottom: 10px;
+    }
+
+     /* Push nav buttons container to bottom */
+    .step .nav-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 15px 25px;
+        justify-content: space-between;
+        align-items: center; /* Ensure vertical alignment */
+        background-color: #ffffff;
+        border-top: 1px solid #eee;
+        gap: 15px;
+    }
+     .step .nav-buttons button {
+        width: auto;
+        flex-grow: 0; /* Reset grow initially */
+        flex-shrink: 1; /* Allow shrinking if needed, except round button */
+        margin: 0;
+     }
+
+     /* Let regular buttons grow if needed on mobile */
+     .step .nav-buttons button:not(.round-next-button) {
+        flex-grow: 1;
+     }
+
+     /* Ensure round button specific sizes and flex props on mobile */
+     .step .nav-buttons .round-next-button {
+        width: 60px;
+        height: 60px;
+        flex-basis: 60px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        padding: 0;
+        margin: 0;
+     }
+
+}
+
+/* Align single button in step 2 to the right */
+#step-2 .nav-buttons {
+    justify-content: flex-end;
 } 
